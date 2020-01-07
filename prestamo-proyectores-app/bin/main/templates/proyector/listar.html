@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-white table-responsive" >
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<!-- 		<h1 class="text-secondary border border-success" ></h1> -->
+
+				<h4 class="card-title">
+					<a class="btn btn-outline-primary btn-xs" th:href="@{/proyector/form}">
+						Agregar Proyector</a>
+				</h4>
+
+				<table id="tablePr" class="table table-striped table-bordered">
+					<thead class="thead-inverse thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>ALTA</th>
+							<th>MARCA</th>
+							<th>MODELO</th>
+							<th>SERIE</th>
+							<th>COLOR</th>
+							<th>HOUR USED</th>
+							<th>ESTATUS</th>
+							<th>OPCIONES</th>
+<!-- 							<th>ELIMINAR</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="proyector: ${proyectores}">
+							<td><a class="btn btn-outline-primary btn-sm" th:href="@{/proyector/ver/} + ${proyector.id}" th:text="${proyector.id}"></a></td>
+							<td th:text="${proyector.alta}"></td>
+							<td th:text="${proyector.marca}"></td>
+							<td th:text="${proyector.modelo}"></td>
+							<td th:text="${proyector.serie}"></td>
+							<td th:text="${proyector.color}"></td>
+<!-- 							<td th:text="${proyector.hoursUsed}"></td> -->
+							<td >
+								<span th:if="${#strings.startsWith(proyector.hoursUsed, '400')}"  class="badge badge-danger" th:text="${proyector.hoursUsed}"></span>
+								<span th:unless="${#strings.startsWith(proyector.hoursUsed, '400')}"  class="badge badge-primary" th:text="${proyector.hoursUsed}"></span>
+							</td>
+							<td >
+								<span th:if="${proyector.estatus == 'Disponible'}"  class="badge badge-success">Disponible</span>
+								<span th:unless="${proyector.estatus == 'Disponible'}"  class="badge badge-danger" >Ocupado</span>
+							</td>
+
+							<td>
+								<a class="btn btn-outline-primary btn-sm"
+								th:href="@{/proyector/form/} + ${proyector.id}"								
+								role="button" title="Editar"><i class="fa fa-pencil-square"></i></a>
+							
+								<a class="btn  btn-outline-danger btn-sm"
+								th:href="@{/proyector/eliminar/} + ${proyector.id}"
+								role="button" title="Eliminar"
+								onclick="return confirm('Estás seguro que quieres eliminar?');"><i class="fa fa-trash-o"></i></a>
+							</td>
+								
+<!-- 							<td><a class="btn  btn-outline-danger btn-xs" -->
+<!-- 								th:href="@{/proyector/eliminar/} + ${proyector.id}" -->
+<!-- 								th:text="'eliminar'" -->
+<!-- 								onclick="return confirm('Est�s seguro que quieres eliminar?');"></a></td> -->
+
+						</tr>
+
+					</tbody>
+
+				</table>
+				
+<!-- 				<nav th:replace="paginator-nav :: paginator"></nav> -->
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/table-prestamo :: javascriptTable"></script>
+
+</body>
+</html>

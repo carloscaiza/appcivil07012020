@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<!-- 		<h1 class="text-secondary border border-success" th:text="${titulo}"></h1> -->
+
+				<form th:action="@{/materia/form}" th:object="${materia}"
+					method="post">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-4">
+							<input type="text" th:field="*{nombre}" class="form-control" placeholder="e.g. Hidráulica 1"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Codigo</label>
+						<div class="col-sm-4">
+							<input type="text" th:field="*{codigo}" class="form-control" placeholder="e.g. P.203 H"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">N° Créditos</label>
+						<div class="col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio1"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio1" name="c1" value="1" required>1
+							</label>
+							<div class="invalid-feedback">El número de creditos es requerido</div>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio2"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio2" name="c2" value="2" required>2
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio3"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio3" name="c3" value="3" required>3
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio4"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio4" name="c4" value="4" required>4
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio5"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio5" name="c5" value="5" required>5
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio6"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio6" name="c6" value="6" required>6
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio7"> <input
+								type="radio" th:field="*{creditos}" class="form-check-input"
+								id="radio7" name="c7" value="8" required>8
+							</label>
+						</div>
+<!-- 						<div class="col-sm-6"> -->
+<!-- 							<select th:field="*{creditos}" class="form-control" -->
+<!-- 								th:errorclass="'form-control alert-danger'"> -->
+<!-- 								<option value="1">1</option> -->
+<!-- 								<option value="2">2</option> -->
+<!-- 								<option value="3">3</option> -->
+<!-- 								<option value="4">4</option> -->
+<!-- 								<option value="5">5</option> -->
+<!-- 								<option value="6">6</option> -->
+<!-- 								<option value="8">8</option> -->
+<!-- 							</select> <small class="form-text text-danger" -->
+<!-- 								th:if="${#fields.hasErrors('creditos')}" th:errors="*{creditos}"></small> -->
+<!-- 						</div> -->
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Semestre</label>
+						<div class="col-sm-4">
+							<select th:field="*{semestre}" class="form-control" required>
+								<option value="0" disabled>Seleccione</option>
+								<option value="1">Primero</option>
+								<option value="2">Segundo</option>
+								<option value="3">Tercero</option>
+								<option value="4">Cuarto</option>
+								<option value="5">Quinto</option>
+								<option value="6">Sexto</option>
+								<option value="7">Septimo</option>
+								<option value="8">Octavo</option>
+								<option value="9">Noveno</option>
+							</select>
+							<div class="invalid-feedback">El semestre es requerido</div>
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('semestre')}" th:errors="*{semestre}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Paralelo</label>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio1"> <input
+								type="radio" th:field="*{paralelo}" class="form-check-input"
+								id="radio1" name="p1" value="1" required>P1
+							</label>
+							<div class="invalid-feedback">El paralelo es requerido</div>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio2"> <input
+								type="radio" th:field="*{paralelo}" class="form-check-input"
+								id="radio2" name="p2" value="2" required>P2
+							</label>
+						</div>
+						<div class=" col-sm-1 form-check-inline">
+							<label class="form-check-label" for="radio3"> <input
+								type="radio" th:field="*{paralelo}" class="form-check-input"
+								id="radio3" name="p3" value="3" required>P3
+							</label>
+						</div>
+						<!-- 						<div class="col-sm-6"> -->
+						<!-- 							<select th:field="*{paralelo}" class="form-control"> -->
+						<!-- 	 							<option value="1">P1</option> -->
+						<!-- 	 							<option value="2">P2</option> -->
+						<!-- 	 							<option value="3">P3</option> -->
+						<!--  							</select> -->
+						<!-- 								<small class="form-text text-danger" -->
+						<!-- 								th:if="${#fields.hasErrors('paralelo')}" th:errors="*{paralelo}"></small> -->
+						<!-- 						</div> -->
+					</div>
+
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar"
+								class="btn btn-outline-success" />
+						</div>
+					</div>
+
+					<!-- 					<input type="hidden" th:field="*{id}" /> -->
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

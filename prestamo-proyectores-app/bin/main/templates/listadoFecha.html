@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header "></header>
+
+
+	<div class="container py-4">
+
+		<div class="card bg-white table-responsive" >
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+			
+		
+				<h4 class="card-title">
+
+					<a th:href="@{/sendFecha }" class="btn btn-light btn-xs">&laquo;
+						Regresar</a> 
+					<a class="btn btn-danger btn-xs float-right mx-2"
+						th:href="@{/listadoFecha (format=pdf)}">PDF</a>
+					<a class="btn btn-success btn-xs float-right"
+						th:href="@{/listadoFecha (format=xlsx)}">EXCEL</a>
+				</h4>
+
+
+				<table id="tablePr" class="table table-striped table-bordered">
+					<thead class="thead-inverse thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>ALTA PRO.</th>
+							<th>FECHA</th>
+							<th>CARTA COMPROMISO PROF / EST</th>
+							<th>MATERIA</th>
+							<th>AULA</th>
+							<th>HORA IN.</th>
+							<th>HORA FN.</th>
+<!-- 							<th>REGISTRO</th> -->
+<!-- 							<th>PROYECTOR</th> -->
+<!-- 							<th>OBSERVACIONES</th> -->
+							<th>ESTADO</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="prestamo: ${prestamos}">
+							<td><a class="btn btn-outline-primary btn-sm" th:href="@{/ver/} + ${prestamo.id}" th:text="${prestamo.id}"></a></td>
+							<td th:text="${prestamo.proyector.alta}"></td>
+<!-- 							<td th:text="${prestamo.createPr}"></td> -->
+							<td th:text="${#dates.format(prestamo.createPr, 'dd-MM-yyyy')}"></td>
+							<td th:text="${prestamo.registro.profesor.apellido} +' '+ ${prestamo.registro.profesor.nombre} +' / '+ ${prestamo.registro.estudiante.apellido}"></td>						
+							<td th:text="${prestamo.registro.materia.nombre}"></td>
+							<td th:text="${prestamo.aula}"></td>
+							<td th:text="${prestamo.horaIn}"></td>
+							<td th:text="${prestamo.horaFn}"></td>								
+<!-- 							<td th:text="${prestamo.observacion}"></td> -->
+							
+							<td >
+								<span th:if="${prestamo.estado == 'Terminado'}"  class="badge badge-success">Terminado</span>
+								<span th:unless="${prestamo.estado == 'Terminado'}"  class="badge badge-danger" >Activo</span>
+							</td>								
+						</tr>
+
+					</tbody>
+
+				</table>
+				
+<!-- 				<nav th:replace="paginator-nav :: paginator"></nav> -->
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="prestamo/js/table-prestamo :: javascriptTable"></script>
+	<script>
+      $(function () {
+          $("#fechaIn").datepicker({dateFormat: 'yy-mm-dd'});
+          $("#fechaFn").datepicker({dateFormat: 'yy-mm-dd'});
+        }
+      );
+    </script>
+
+</body>
+</html>

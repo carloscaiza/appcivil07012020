@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+
+<header th:replace="layout/layout :: header "></header>
+
+	<div class="container">
+		<h1 class="text-secondary border border-success" th:text="${titulo}"></h1>
+
+		<form th:action="@{/persona/form}" th:object="${persona}" method="post">
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">NOMBRE</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{nombre}" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">APELLIDO</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{apellido}" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">EMAIL</label>
+				<div class="col-sm-6">
+					<input type="email" th:field="*{email}" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" value="Crear Persona" class="btn btn-primary" />
+				</div>
+			</div>
+
+			<input type="hidden" th:field="*{id}" />
+
+		</form>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

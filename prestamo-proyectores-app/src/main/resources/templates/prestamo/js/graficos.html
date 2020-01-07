@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<script type="text/javascript" th:fragment="javascriptGraficoProy">
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-proyectoresg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].alta);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Proyectores',
+		            //backgroundColor: 'rgba(200, 200, 200, 0.75)',
+		            backgroundColor: coloR,
+		            //borderColor: 'rgba(200, 200, 200, 0.75)',
+		            //hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+		            //hoverBorderColor: 'rgba(200, 200, 200, 1)',
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#pieProy");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'pie',
+		        data: chartdata,
+		        options: {
+				      title: {
+				        display: true,
+				        text: 'Proyectores (Número de prestamos)'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+
+    </script>
+
+	<script type="text/javascript" th:fragment="javascriptGraficoMat">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-materiasg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].nombre);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            //backgroundColor: 'rgba(200, 200, 200, 0.75)',
+		            backgroundColor: coloR,
+		            //borderColor: 'rgba(200, 200, 200, 0.75)',
+		            //hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+		            //hoverBorderColor: 'rgba(200, 200, 200, 1)',
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#doughnutMat");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'doughnut',
+		        data: chartdata,
+		        options: {
+// 		        	legend: { display: false },
+				    title: {
+				        display: true,
+				        text: 'Materias (Número de prestamos)'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+	<script type="text/javascript" th:fragment="javascriptGraficoEst">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-estudiantesg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].apellido);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            //backgroundColor: 'rgba(200, 200, 200, 0.75)',
+		            backgroundColor: coloR,
+		            //borderColor: 'rgba(200, 200, 200, 0.75)',
+		            //hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+		            //hoverBorderColor: 'rgba(200, 200, 200, 1)',
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#horizontalBarEst");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'horizontalBar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+				    title: {
+				        display: true,
+				        text: 'Estudiantes (Número de prestamos)'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+		<script type="text/javascript" th:fragment="javascriptGraficoProf">
+	
+	$(document).ready(function(){
+		  $.ajax({
+		    url: "/cargar-profesoresg",
+		    method: "GET",
+		    dataType : 'JSON',
+		    success: function(data) {
+		      console.log(data);
+		      var id = [];
+		      var value = [];
+		      var coloR = [];
+		      
+		      var dynamicColors = function() {
+		          var r = Math.floor(Math.random() * 255);
+		          var g = Math.floor(Math.random() * 255);
+		          var b = Math.floor(Math.random() * 255);
+		          return "rgb(" + r + "," + g + "," + b + ")";
+		      };
+
+		      for(var i in data) {
+		        id.push(data[i].apellido);
+		        value.push(data[i].numprestamo);
+		        coloR.push(dynamicColors());
+		      }
+
+		      var chartdata = {
+		        labels: id,
+		        datasets : [{		        	
+		            label: 'Núm. Prestamos',
+		            //backgroundColor: 'rgba(200, 200, 200, 0.75)',
+		            backgroundColor: coloR,
+		            //borderColor: 'rgba(200, 200, 200, 0.75)',
+		            //hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+		            //hoverBorderColor: 'rgba(200, 200, 200, 1)',
+		            data: value.map(function(x) {return x * 1;})
+		          }]
+		      };
+
+		      var ctx = $("#barProf");
+
+		      var barGraph = new Chart(ctx, {
+		        type: 'bar',
+		        data: chartdata,
+		        options: {
+		        	legend: { display: false },
+		        	scales: {
+		                yAxes: [{
+		                    ticks: {
+		                        beginAtZero: true,
+// 		                        stepSize: 1
+		                    }
+		                }]
+		            },
+				    title: {
+				        display: true,
+				        text: 'Profesores (Número de prestamos)'
+				      }
+				    }
+		      });
+		    },
+		    error: function(data) {
+		      console.log(data);
+		    }
+		  });
+		});
+	
+	</script>
+	
+</body>
+</html>
